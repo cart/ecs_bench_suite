@@ -1,6 +1,6 @@
 use bevy_ecs::prelude::*;
+use bevy_tasks::{prelude::*, TaskPool};
 use cgmath::*;
-use rayon::prelude::*;
 
 #[derive(Copy, Clone)]
 struct Position(Vector3<f32>);
@@ -11,7 +11,7 @@ struct Rotation(Vector3<f32>);
 #[derive(Copy, Clone)]
 struct Velocity(Vector3<f32>);
 
-pub struct Benchmark(World);
+pub struct Benchmark(World, Resources, Box<dyn System>);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -26,22 +26,25 @@ impl Benchmark {
             )
         }));
 
-        Self(world)
-    }
-
-    pub fn run(&mut self) {
-        self.0
-            .query::<(&mut Position, &mut Matrix4<f32>)>()
-            .iter_batched(64)
-            .par_bridge()
-            .for_each(|batch| {
-                for (mut pos, mut mat) in batch {
+        fn sys(task_pool: Res<TaskPool>, mut query: Query<(&mut Position, &mut Matrix4<f32>)>) {
+            query
+                .par_iter_mut(64)
+                .for_each(&task_pool, |(mut pos, mut mat)| {
                     for _ in 0..100 {
                         *mat = mat.invert().unwrap();
                     }
 
                     pos.0 = mat.transform_vector(pos.0);
-                }
-            });
+                });
+        }
+
+        let mut resources = Resources::default();
+        resources.insert(TaskPool::default());
+
+        Self(world, resources, sys.system())
+    }
+
+    pub fn run(&mut self) {
+        self.2.run(&mut self.0, &mut self.1);
     }
 }

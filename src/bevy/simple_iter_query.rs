@@ -13,11 +13,12 @@ struct Rotation(Vector3<f32>);
 #[derive(Copy, Clone)]
 struct Velocity(Vector3<f32>);
 
-pub struct Benchmark(World);
+pub struct Benchmark(World, Resources, Box<dyn System>);
 
 impl Benchmark {
     pub fn new() -> Self {
         let mut world = World::new();
+        let mut resources = Resources::default();
         world.spawn_batch((0..10_000).map(|_| {
             (
                 Transform(Matrix4::from_scale(1.0)),
@@ -27,12 +28,19 @@ impl Benchmark {
             )
         }));
 
-        Self(world)
+        fn query_system(mut query: Query<(&Velocity, &mut Position)>) {
+            for (velocity, mut position) in query.iter_mut() {
+                position.0 += velocity.0;
+            }
+        }
+
+        let mut system=  query_system.system();
+        system.initialize(&mut world, &mut resources);
+
+        Self(world, resources, system)
     }
 
     pub fn run(&mut self) {
-        for (velocity, mut position) in self.0.query_mut::<(&Velocity, &mut Position)>() {
-            position.0 += velocity.0;
-        }
+        self.2.run(&mut self.0, &mut self.1);
     }
 }

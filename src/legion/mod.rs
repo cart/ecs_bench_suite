@@ -1,4 +1,6 @@
 pub mod add_remove;
+pub mod get_component;
+pub mod get_component_system;
 pub mod frag_iter;
 pub mod heavy_compute;
 pub mod schedule;

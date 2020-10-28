@@ -30,5 +30,11 @@ impl Benchmark {
                 Velocity(Vector3::unit_x()),
             )
         }));
+        // world.spawn_batch_new(SoaBatch::new((
+        //     vec![Transform(Matrix4::from_scale(1.0)); 10000],
+        //     vec![Position(Vector3::unit_x()); 10000],
+        //     vec![Rotation(Vector3::unit_x()); 10000],
+        //     vec![Velocity(Vector3::unit_x()); 10000],
+        // )));
     }
 }
