@@ -51,8 +51,8 @@ fn bench_simple_iter(c: &mut Criterion) {
         let mut bench = bevy::simple_iter_query::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("bevy_foreach", |b| {
-        let mut bench = bevy::simple_iter_foreach::Benchmark::new();
+    group.bench_function("bevy_input", |b| {
+        let mut bench = bevy::simple_iter_input::Benchmark::new();
         b.iter(move || bench.run());
     });
     // group.bench_function("hecs", |b| {
@@ -93,10 +93,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy_foreach", |b| {
-        let mut bench = bevy::frag_iter_foreach::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("bevy_foreach", |b| {
+    //     let mut bench = bevy::frag_iter_foreach::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("hecs", |b| {
     //     let mut bench = hecs::frag_iter::Benchmark::new();
     //     b.iter(move || bench.run());

@@ -13,7 +13,7 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for x in 0..10000 {
+        for x in 0..100000 {
             let mut a = self.0.get_mut::<A>(self.1).unwrap();
             a.0 += 1.0;
         }

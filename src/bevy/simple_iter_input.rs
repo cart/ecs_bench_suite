@@ -13,7 +13,7 @@ struct Rotation(Vector3<f32>);
 #[derive(Copy, Clone)]
 struct Velocity(Vector3<f32>);
 
-pub struct Benchmark(World, Resources, Box<dyn System<Input = (), Output = ()>>);
+pub struct Benchmark(World, Resources, Box<dyn System<Input = u32, Output = ()>>);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -28,7 +28,7 @@ impl Benchmark {
             )
         }));
 
-        fn query_system(mut query: Query<(&Velocity, &mut Position)>) {
+        fn query_system(In(_input): In<u32>, mut query: Query<(&Velocity, &mut Position)>) {
             for (velocity, mut position) in query.iter_mut() {
                 position.0 += velocity.0;
             }
@@ -41,6 +41,6 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        self.2.run((), &mut self.0, &mut self.1);
+        self.2.run(10, &mut self.0, &mut self.1);
     }
 }

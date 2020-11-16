@@ -11,7 +11,7 @@ macro_rules! create_entities {
 
 struct Data(f32);
 
-pub struct Benchmark(World, Resources, Box<dyn System>);
+pub struct Benchmark(World, Resources, Box<dyn System<Input = (), Output = ()>>);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -29,10 +29,10 @@ impl Benchmark {
         let mut system = query_system.system();
         system.initialize(&mut world, &mut resources);
 
-        Self(world, resources, system)
+        Self(world, resources, Box::new(system))
     }
 
     pub fn run(&mut self) {
-        self.2.run(&mut self.0, &mut self.1);
+        self.2.run((), &mut self.0, &mut self.1);
     }
 }

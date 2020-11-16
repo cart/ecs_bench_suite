@@ -11,7 +11,7 @@ struct Rotation(Vector3<f32>);
 #[derive(Copy, Clone)]
 struct Velocity(Vector3<f32>);
 
-pub struct Benchmark(World, Resources, Box<dyn System>);
+pub struct Benchmark(World, Resources, Box<dyn System<Input = (), Output = ()>>);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -40,11 +40,14 @@ impl Benchmark {
 
         let mut resources = Resources::default();
         resources.insert(TaskPool::default());
+        let mut system = sys.system();
+        system.initialize(&mut world, &mut resources);
+        system.update(&mut world);
 
-        Self(world, resources, sys.system())
+        Self(world, resources, Box::new(system))
     }
 
     pub fn run(&mut self) {
-        self.2.run(&mut self.0, &mut self.1);
+        self.2.run((), &mut self.0, &mut self.1);
     }
 }

@@ -6,7 +6,7 @@ type State = Entity;
 #[system]
 #[write_component(A)]
 fn sys(world: &mut SubWorld, #[state] entity: &State) {
-    for x in 0..10000 {
+    for x in 0..100000 {
         let mut entry = world.entry_mut(*entity).unwrap();
         let a = entry.get_component_mut::<A>().unwrap();
         a.0 += 1.0;
