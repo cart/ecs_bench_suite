@@ -1,4 +1,4 @@
-use bevy_ecs::{prelude::*, Mut, Schedule};
+use bevy_ecs::{Stage, prelude::*};
 
 struct A(f32);
 struct B(f32);
@@ -24,7 +24,7 @@ fn ce(mut query: Query<(&mut C, &mut E)>) {
     }
 }
 
-pub struct Benchmark(World, Resources, Schedule);
+pub struct Benchmark(World, Resources, SystemStage);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -39,14 +39,13 @@ impl Benchmark {
 
         world.spawn_batch((0..10000).map(|_| (A(0.0), B(0.0), C(0.0), E(0.0))));
 
-        let mut schedule = Schedule::default();
-        schedule.add_stage("main");
-        schedule.add_system_to_stage("main", ab);
-        schedule.add_system_to_stage("main", cd);
-        schedule.add_system_to_stage("main", ce);
-        schedule.initialize(&mut world, &mut resources);
+        let mut stage = SystemStage::parallel();
+        stage.add_system(ab.system());
+        stage.add_system(cd.system());
+        stage.add_system(ce.system());
+        stage.run(&mut world, &mut resources);
 
-        Self(world, resources, schedule)
+        Self(world, resources, stage)
     }
 
     pub fn run(&mut self) {

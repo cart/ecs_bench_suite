@@ -28,8 +28,8 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for data in self.1.iter_mut(&mut self.0) {
+        self.1.for_each_mut(&mut self.0, |data| {
             data.0 *= 2.0;
-        }
+        });
     }
 }

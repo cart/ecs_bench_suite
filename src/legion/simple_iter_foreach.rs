@@ -38,9 +38,8 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for (velocity, position) in self.1.iter_mut(&mut self.0) {
+        self.1.for_each_mut(&mut self.0, |(velocity, position)| {
             position.0 += velocity.0;
-        }
-
+        });
     }
 }

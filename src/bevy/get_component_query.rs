@@ -2,7 +2,7 @@ use bevy_ecs::prelude::*;
 
 struct A(f32);
 
-pub struct Benchmark(World, Resources, Box<dyn System<Input = (), Output = ()>>);
+pub struct Benchmark(World, Resources, Box<dyn System<In = (), Out = ()>>);
 
 impl Benchmark {
     pub fn new() -> Self {
@@ -11,7 +11,7 @@ impl Benchmark {
         world.spawn((A(0.0),));
 
         fn query_system(mut query: Query<&mut A>) {
-            for x in 0..100000 {
+            for _x in 0..100000 {
                 if let Ok(mut a) = query.get_mut(Entity::new(0)) {
                     a.0 += 1.0;
                 }
@@ -23,7 +23,7 @@ impl Benchmark {
 
         let mut system = query_system.system();
         system.initialize(&mut world, &mut resources);
-        system.update(&world);
+        system.update_access(&world);
 
         Self(world, resources, Box::new(system))
     }
