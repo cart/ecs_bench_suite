@@ -1,3 +1,4 @@
+use bevy_ecs::core::{ComponentDescriptor, StorageType};
 use bevy_ecs::prelude::*;
 use cgmath::*;
 
@@ -18,6 +19,12 @@ pub struct Benchmark<'w>(World, QueryState<(&'w Velocity, &'w mut Position)>);
 impl<'w> Benchmark<'w> {
     pub fn new() -> Self {
         let mut world = World::new();
+        world
+            .register_component(ComponentDescriptor::new::<Velocity>(StorageType::SparseSet))
+            .unwrap();
+        world
+            .register_component(ComponentDescriptor::new::<Position>(StorageType::SparseSet))
+            .unwrap();
 
         // TODO: batch this
         for _ in 0..10_000 {
@@ -34,7 +41,7 @@ impl<'w> Benchmark<'w> {
     }
 
     pub fn run(&mut self) {
-        for (velocity, mut position) in unsafe { self.1.iter_unchecked_manual(&mut self.0) } {
+        for (velocity, mut position) in self.1.iter_mut(&mut self.0) {
             position.0 += velocity.0;
         }
     }

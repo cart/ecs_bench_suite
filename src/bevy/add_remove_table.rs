@@ -8,21 +8,21 @@ pub struct Benchmark(World, Vec<Entity>);
 impl Benchmark {
     pub fn new() -> Self {
         let mut world = World::default();
-
-        let entities = world
-            .spawn_batch((0..10000).map(|_| (A(0.0),)))
-            .collect::<Vec<_>>();
+        let mut entities = Vec::with_capacity(10_000);
+        for _ in 0..10_000 {
+            entities.push(world.spawn().insert(A(0.0)).id());
+        }
 
         Self(world, entities)
     }
 
     pub fn run(&mut self) {
         for entity in &self.1 {
-            self.0.insert_one(*entity, B(0.0)).unwrap();
+            self.0.entity_mut(*entity).insert(B(0.0));
         }
 
         for entity in &self.1 {
-            self.0.remove_one::<B>(*entity).unwrap();
+            self.0.entity_mut(*entity).remove::<B>();
         }
     }
 }

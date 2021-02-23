@@ -3,10 +3,10 @@ use ecs_bench_suite::*;
 
 fn bench_simple_insert(c: &mut Criterion) {
     let mut group = c.benchmark_group("simple_insert");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::simple_insert::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::simple_insert::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion_0.2.4", |b| {
     //     let mut bench = legion_2_4::simple_insert::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -21,15 +21,6 @@ fn bench_simple_insert(c: &mut Criterion) {
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy3", |b| {
-        let mut bench = bevy3::simple_insert::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-
-    group.bench_function("bevy3_unbatched", |b| {
-        let mut bench = bevy3::simple_insert_unbatched::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     // group.bench_function("hecs", |b| {
     //     let mut bench = hecs::simple_insert::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -62,33 +53,25 @@ fn bench_simple_iter(c: &mut Criterion) {
     //     let mut bench = legion_2_4::simple_iter::Benchmark::new();
     //     b.iter(move || bench.run());
     // });
-    // group.bench_function("bevy", |b| {
-    //     let mut bench = bevy::simple_iter::Benchmark::new();
-    //     b.iter(move || bench.run());
-    // });
-    // group.bench_function("bevy_query", |b| {
-    //     let mut bench = bevy::simple_iter_query::Benchmark::new();
-    //     b.iter(move || bench.run());
-    // });
-    group.bench_function("bevy3", |b| {
-        let mut bench = bevy3::simple_iter::Benchmark::new();
+    group.bench_function("bevy", |b| {
+        let mut bench = bevy::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy3_system", |b| {
-        let mut bench = bevy3::simple_iter_system::Benchmark::new();
+    group.bench_function("bevy_system", |b| {
+        let mut bench = bevy::simple_iter_system::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("bevy3_sparse", |b| {
-        let mut bench = bevy3::simple_iter_sparse::Benchmark::new();
+    group.bench_function("bevy_sparse", |b| {
+        let mut bench = bevy::simple_iter_sparse::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("bevy3_foreach", |b| {
-        let mut bench = bevy3::simple_iter_foreach::Benchmark::new();
+    group.bench_function("bevy_foreach", |b| {
+        let mut bench = bevy::simple_iter_foreach::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("bevy3_sparse_foreach", |b| {
-        let mut bench = bevy3::simple_iter_sparse_foreach::Benchmark::new();
+    group.bench_function("bevy_sparse_foreach", |b| {
+        let mut bench = bevy::simple_iter_sparse_foreach::Benchmark::new();
         b.iter(move || bench.run());
     });
     // group.bench_function("bevy_input", |b| {
@@ -119,10 +102,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
         let mut bench = legion::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("legion_foreach", |b| {
-        let mut bench = legion::frag_iter_foreach::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion_foreach", |b| {
+    //     let mut bench = legion::frag_iter_foreach::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion_0.2.4", |b| {
     //     let mut bench = legion_2_4::frag_iter::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -137,19 +120,11 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
     //     b.iter(move || bench.run());
     // });
 
-    group.bench_function("bevy3", |b| {
-        let mut bench = bevy3::frag_iter::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("bevy3_foreach", |b| {
-        let mut bench = bevy3::frag_iter_foreach::Benchmark::new();
+    group.bench_function("bevy_foreach", |b| {
+        let mut bench = bevy::frag_iter_foreach::Benchmark::new();
         b.iter(move || bench.run());
     });
 
-    // group.bench_function("bevy_foreach", |b| {
-    //     let mut bench = bevy::frag_iter_foreach::Benchmark::new();
-    //     b.iter(move || bench.run());
-    // });
     // group.bench_function("hecs", |b| {
     //     let mut bench = hecs::frag_iter::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -166,15 +141,15 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
 
 fn bench_sparse_frag_iter(c: &mut Criterion) {
     let mut group = c.benchmark_group("sparse_fragmented_iter");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::sparse_frag_iter::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::sparse_frag_iter::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
 
-    group.bench_function("legion_foreach", |b| {
-        let mut bench = legion::sparse_frag_iter_foreach::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion_foreach", |b| {
+    //     let mut bench = legion::sparse_frag_iter_foreach::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion_0.2.4", |b| {
     //     let mut bench = legion_2_4::frag_iter::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -184,20 +159,11 @@ fn bench_sparse_frag_iter(c: &mut Criterion) {
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy3", |b| {
-        let mut bench = bevy3::sparse_frag_iter::Benchmark::new();
+    group.bench_function("bevy_foreach", |b| {
+        let mut bench = bevy::sparse_frag_iter_foreach::Benchmark::new();
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy3_foreach", |b| {
-        let mut bench = bevy3::sparse_frag_iter_foreach::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-
-    // group.bench_function("bevy_foreach", |b| {
-    //     let mut bench = bevy::frag_iter_foreach::Benchmark::new();
-    //     b.iter(move || bench.run());
-    // });
     // group.bench_function("hecs", |b| {
     //     let mut bench = hecs::frag_iter::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -214,10 +180,10 @@ fn bench_sparse_frag_iter(c: &mut Criterion) {
 
 fn bench_schedule(c: &mut Criterion) {
     let mut group = c.benchmark_group("schedule");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::schedule::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::schedule::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion (packed)", |b| {
     //     let mut bench = legion_packed::schedule::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -231,10 +197,6 @@ fn bench_schedule(c: &mut Criterion) {
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy_3", |b| {
-        let mut bench = bevy3::schedule::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     // group.bench_function("shipyard", |b| {
     //     let mut bench = shipyard::schedule::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -287,53 +249,48 @@ fn bench_heavy_compute(c: &mut Criterion) {
 
 fn bench_add_remove(c: &mut Criterion) {
     let mut group = c.benchmark_group("add_remove_component");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::add_remove::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::add_remove::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion_0.2.4", |b| {
     //     let mut bench = legion_2_4::add_remove::Benchmark::new();
     //     b.iter(move || bench.run());
     // });
-    group.bench_function("hecs", |b| {
-        let mut bench = hecs::add_remove::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("shipyard", |b| {
-        let mut bench = shipyard::add_remove::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("specs", |b| {
-        let mut bench = specs::add_remove::Benchmark::new();
+    // group.bench_function("hecs", |b| {
+    //     let mut bench = hecs::add_remove::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
+    // group.bench_function("shipyard", |b| {
+    //     let mut bench = shipyard::add_remove::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
+    // group.bench_function("specs", |b| {
+    //     let mut bench = specs::add_remove::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
+
+    group.bench_function("bevy_table", |b| {
+        let mut bench = bevy::add_remove_table::Benchmark::new();
         b.iter(move || bench.run());
     });
 
-    group.bench_function("bevy", |b| {
-        let mut bench = bevy::add_remove::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-
-    group.bench_function("bevy3_table", |b| {
-        let mut bench = bevy3::add_remove_table::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-
-    group.bench_function("bevy3_sparse_set", |b| {
-        let mut bench = bevy3::add_remove_sparse_set::Benchmark::new();
+    group.bench_function("bevy_sparse_set", |b| {
+        let mut bench = bevy::add_remove_sparse_set::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
 
 fn bench_get_component(c: &mut Criterion) {
     let mut group = c.benchmark_group("get_component");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::get_component::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("legion_system", |b| {
-        let mut bench = legion::get_component_system::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::get_component::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
+    // group.bench_function("legion_system", |b| {
+    //     let mut bench = legion::get_component_system::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("legion_0.2.4", |b| {
     //     let mut bench = legion_2_4::get_component::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -342,14 +299,15 @@ fn bench_get_component(c: &mut Criterion) {
         let mut bench = bevy::get_component::Benchmark::new();
         b.iter(move || bench.run());
     });
+
+    group.bench_function("bevy_system", |b| {
+        let mut bench = bevy::get_component_system::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     // group.bench_function("bevy_query", |b| {
     //     let mut bench = bevy::get_component_query::Benchmark::new();
     //     b.iter(move || bench.run());
     // });
-    group.bench_function("bevy_3", |b| {
-        let mut bench = bevy3::get_component::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     // group.bench_function("hecs", |b| {
     //     let mut bench = hecs::get_component::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -366,10 +324,10 @@ fn bench_get_component(c: &mut Criterion) {
 
 fn bench_serialize_text(c: &mut Criterion) {
     let mut group = c.benchmark_group("serialize_text");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::serialize_text::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::serialize_text::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("bevy", |b| {
     //     let mut bench = bevy::serialize_text::Benchmark::new();
     //     b.iter(move || bench.run());
@@ -378,10 +336,10 @@ fn bench_serialize_text(c: &mut Criterion) {
 
 fn bench_serialize_binary(c: &mut Criterion) {
     let mut group = c.benchmark_group("serialize_binary");
-    group.bench_function("legion", |b| {
-        let mut bench = legion::serialize_binary::Benchmark::new();
-        b.iter(move || bench.run());
-    });
+    // group.bench_function("legion", |b| {
+    //     let mut bench = legion::serialize_binary::Benchmark::new();
+    //     b.iter(move || bench.run());
+    // });
     // group.bench_function("bevy", |b| {
     //     let mut bench = bevy::serialize_text::Benchmark::new();
     //     b.iter(move || bench.run());

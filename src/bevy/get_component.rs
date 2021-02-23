@@ -2,19 +2,20 @@ use bevy_ecs::prelude::*;
 
 struct A(f32);
 
-pub struct Benchmark(World, Entity);
+pub struct Benchmark<'w>(World, Entity, QueryState<&'w mut A>);
 
-impl Benchmark {
+impl<'w> Benchmark<'w> {
     pub fn new() -> Self {
-        let mut world = World::default();
+        let mut world = World::new();
 
-        let entity = world.spawn((A(0.0),));
-        Self(world, entity)
+        let entity = world.spawn().insert(A(0.0)).id();
+        let query = world.query::<&mut A>();
+        Self(world, entity, query)
     }
 
     pub fn run(&mut self) {
         for _x in 0..100000 {
-            let mut a = self.0.get_mut::<A>(self.1).unwrap();
+            let mut a = unsafe {self.2.get_unchecked_manual(&mut self.0, self.1).unwrap() };
             a.0 += 1.0;
         }
     }
