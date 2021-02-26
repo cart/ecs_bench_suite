@@ -7,21 +7,21 @@ struct D(f32);
 struct E(f32);
 
 fn ab(mut query: Query<(&mut A, &mut B)>) {
-    for (mut a, mut b) in query.iter_mut() {
+    query.for_each_mut(|(mut a, mut b)| {
         std::mem::swap(&mut a.0, &mut b.0);
-    }
+    });
 }
 
 fn cd(mut query: Query<(&mut C, &mut D)>) {
-    for (mut c, mut d) in query.iter_mut() {
+    query.for_each_mut(|(mut c, mut d)| {
         std::mem::swap(&mut c.0, &mut d.0);
-    }
+    });
 }
 
 fn ce(mut query: Query<(&mut C, &mut E)>) {
-    for (mut c, mut e) in query.iter_mut() {
+    query.for_each_mut(|(mut c, mut e)| {
         std::mem::swap(&mut c.0, &mut e.0);
-    }
+    });
 }
 
 pub struct Benchmark(World, SystemStage);
