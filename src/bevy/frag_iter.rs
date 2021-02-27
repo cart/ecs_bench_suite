@@ -1,4 +1,4 @@
-use bevy_ecs::prelude::*;
+use bevy::prelude::*;
 
 macro_rules! create_entities {
     ($world:ident; $( $variants:ident ),*) => {

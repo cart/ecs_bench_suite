@@ -1,5 +1,5 @@
-use bevy_ecs::prelude::*;
-use bevy_ecs::core::{ComponentDescriptor, StorageType};
+use bevy::prelude::*;
+use bevy::ecs::component::{ComponentDescriptor, StorageType};
 use cgmath::*;
 
 #[derive(Copy, Clone)]
@@ -41,7 +41,7 @@ impl<'w> Benchmark<'w> {
     }
 
     pub fn run(&mut self) {
-        self.1.for_each_mut_manual(&mut self.0, |(velocity, mut position)| {
+        self.1.for_each_mut(&mut self.0, |(velocity, mut position)| {
             position.0 += velocity.0;
         });
         // for (velocity, mut position) in self.1.iter_mut(&mut self.0) {

@@ -1,4 +1,4 @@
-use bevy_ecs::prelude::*;
+use bevy::prelude::*;
 use cgmath::*;
 
 #[derive(Copy, Clone)]

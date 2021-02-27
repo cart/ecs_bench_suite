@@ -1,4 +1,4 @@
-use bevy_ecs::prelude::*;
+use bevy::prelude::*;
 
 macro_rules! create_entities {
     ($world:ident; $( $variants:ident ),*) => {
@@ -26,7 +26,7 @@ impl<'w> Benchmark<'w> {
     }
 
     pub fn run(&mut self) {
-        self.1.for_each_mut_manual(&mut self.0, |mut data| {
+        self.1.for_each_mut(&mut self.0, |mut data| {
             data.0 *= 2.0;
         });
     }

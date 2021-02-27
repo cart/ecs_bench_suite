@@ -1,5 +1,5 @@
-use bevy_ecs::prelude::*;
-use bevy_ecs::core::{ComponentDescriptor, StorageType};
+use bevy::prelude::*;
+use bevy::ecs::component::{ComponentDescriptor, StorageType};
 
 struct A(f32);
 struct B(f32);

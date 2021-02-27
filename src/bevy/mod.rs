@@ -1,5 +1,7 @@
 pub mod add_remove_sparse_set;
 pub mod add_remove_table;
+pub mod add_remove_big_table;
+pub mod add_remove_big_sparse_set;
 pub mod frag_iter;
 pub mod frag_iter_foreach;
 pub mod get_component;

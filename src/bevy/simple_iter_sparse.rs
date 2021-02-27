@@ -1,5 +1,5 @@
-use bevy_ecs::core::{ComponentDescriptor, StorageType};
-use bevy_ecs::prelude::*;
+use bevy::ecs::component::{ComponentDescriptor, StorageType};
+use bevy::prelude::*;
 use cgmath::*;
 
 #[derive(Copy, Clone)]
