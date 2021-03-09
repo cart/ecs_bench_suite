@@ -52,21 +52,21 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         let Self(world, registry) = self;
-        let serializable = &world.as_serializable(any(), &*registry);
+        // let serializable = &world.as_serializable(any(), &*registry);
 
-        let encoded = bincode::serialize(serializable).unwrap();
+        // let encoded = bincode::serialize(serializable).unwrap();
 
-        use bincode::config::Options;
-        let mut deserializer = bincode::de::Deserializer::from_slice(
-            &encoded[..],
-            bincode::config::DefaultOptions::new()
-                .with_fixint_encoding()
-                .allow_trailing_bytes(),
-        );
+        // use bincode::config::Options;
+        // let mut deserializer = bincode::de::Deserializer::from_slice(
+        //     &encoded[..],
+        //     bincode::config::DefaultOptions::new()
+        //         .with_fixint_encoding()
+        //         .allow_trailing_bytes(),
+        // );
 
-        registry
-            .as_deserialize()
-            .deserialize(&mut deserializer)
-            .unwrap();
+        // registry
+        //     .as_deserialize()
+        //     .deserialize(&mut deserializer)
+        //     .unwrap();
     }
 }

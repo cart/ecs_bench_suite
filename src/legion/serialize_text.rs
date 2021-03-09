@@ -52,14 +52,14 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         let Self(world, registry) = self;
-        let serializable = &world.as_serializable(any(), &*registry);
+        // let serializable = &world.as_serializable(any(), &*registry);
 
-        let serialized = ron::ser::to_string(serializable).unwrap();
+        // let serialized = ron::ser::to_string(serializable).unwrap();
 
-        let mut deserializer = ron::de::Deserializer::from_str(&serialized).unwrap();
-        registry
-            .as_deserialize()
-            .deserialize(&mut deserializer)
-            .unwrap();
+        // let mut deserializer = ron::de::Deserializer::from_str(&serialized).unwrap();
+        // registry
+        //     .as_deserialize()
+        //     .deserialize(&mut deserializer)
+        //     .unwrap();
     }
 }
