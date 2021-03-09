@@ -15,8 +15,8 @@ rayon = "1.3"
 legion = { path = "../legion" }
 #legion_typeuuid = { git = "https://github.com/TomGillen/legion_typeuuid" }
 legion_2_4 = { package = "legion", version = "0.2.4" }
-bevy_ecs = { path = "../cart-bevy/crates/bevy_ecs", package = "bevy_ecs" }
-bevy_tasks = { path = "../cart-bevy/crates/bevy_tasks"}
+bevy = { path = "../cart-bevy" }
+# bevy_old = { path = "../bevy", package = "bevy" }
 # hecs = "0.2"
 hecs = { path = "../hecs"}
 shipyard = "0.4"
